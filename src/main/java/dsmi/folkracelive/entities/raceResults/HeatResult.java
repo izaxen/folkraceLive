@@ -1,4 +1,4 @@
-package dsmi.folkracelive.entities.raceParts;
+package dsmi.folkracelive.entities.raceResults;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -13,6 +13,6 @@ public class HeatResult {
     private Long heatId;
 
     private int heatNumber;
-    private List<DriverResult> heatResult;
+    private int round;
 
 }

@@ -1,4 +1,4 @@
-package dsmi.folkracelive.entities.raceParts;
+package dsmi.folkracelive.entities.raceResults;
 
 public class DriverResult {
 
