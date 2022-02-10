@@ -11,10 +11,10 @@ abstract public class DriverClasses {
     private Long id;
 
     @Column(
-            name = "amount_of_heats",
+            name = "amount_of_rounds",
             nullable = false
     )
-    private int amountOfHeat;
+    private int amountOfRounds;
 
     @Column(
             name = "runner_up",
