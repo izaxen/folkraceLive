@@ -16,6 +16,9 @@ public class Driver {
             updatable = false
     )
     private Long id;
+
+    private int startNumber;
+
     private String name;
     @Column(
             name = "sur_name",

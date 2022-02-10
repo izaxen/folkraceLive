@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "race-event")
+@Table(name = "race_event")
 public class RaceEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,12 +15,12 @@ public class RaceEvent {
     )
     private Long id;
     @Column(
-            name = "event-name",
+            name = "event_name",
             nullable = false
     )
     private String eventName;
     @Column(
-            name = "event-date",
+            name = "event_date",
             nullable = false
     )
     private LocalDate eventDate;

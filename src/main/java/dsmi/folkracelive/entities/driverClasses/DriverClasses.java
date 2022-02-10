@@ -1,9 +1,12 @@
 package dsmi.folkracelive.entities.driverClasses;
 
+import dsmi.folkracelive.entities.Driver;
 import dsmi.folkracelive.entities.RaceEvent;
 
 import javax.persistence.*;
+import java.util.List;
 
+@MappedSuperclass
 abstract public class DriverClasses {
 
     @Id
@@ -27,6 +30,10 @@ abstract public class DriverClasses {
             nullable = false
     )
     private int amountOfFinals;
+
+    @Transient
+    private List<Driver> drivers;
+
 
     @OneToOne
     @MapsId
