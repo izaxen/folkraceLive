@@ -22,15 +22,17 @@ public class RaceEvent {
             updatable = false
     )
     private Long id;
+
     @Column(
             name = "event_name",
             nullable = false
     )
     private String eventName;
+
     @Column(
             name = "event_date",
             nullable = false
     )
-    private LocalDate eventDate;
+    private String eventDate;
 
 }
