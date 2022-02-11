@@ -1,5 +1,10 @@
 package dsmi.folkracelive.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
@@ -8,11 +13,15 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="drivers")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
-            name="id",
+            name="driver_id",
             updatable = false
     )
     private Long id;

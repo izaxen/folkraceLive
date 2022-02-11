@@ -7,36 +7,37 @@ import javax.persistence.*;
 import java.util.List;
 
 @MappedSuperclass
+
 abstract public class DriverClasses {
 
     @Id
-    @Column(name = "event_id")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "driver_class_id", updatable = false)
+    protected Long id;
 
     @Column(
             name = "amount_of_rounds",
             nullable = false
     )
-    private int amountOfRounds;
+    protected int amountOfRounds;
 
     @Column(
             name = "runner_up",
             nullable = false
     )
-    private boolean runnerUp;
+    protected boolean runnerUp;
 
     @Column(
             name = "amount_of_finals",
             nullable = false
     )
-    private int amountOfFinals;
+    protected int amountOfFinals;
 
     @Transient
-    private List<Driver> drivers;
+    protected List<Driver> drivers;
 
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "event_id" )
     private RaceEvent raceEvent;
 
