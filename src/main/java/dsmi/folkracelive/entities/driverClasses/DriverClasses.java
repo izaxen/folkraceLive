@@ -2,11 +2,15 @@ package dsmi.folkracelive.entities.driverClasses;
 
 import dsmi.folkracelive.entities.Driver;
 import dsmi.folkracelive.entities.RaceEvent;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @MappedSuperclass
+@Getter
+@Setter
 
 abstract public class DriverClasses {
 

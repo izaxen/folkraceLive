@@ -1,7 +1,9 @@
 package dsmi.folkracelive.entities.raceResults;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 
+@Entity
 public class HeatResult extends  DriverResult{
 
     private int round;

@@ -1,10 +1,8 @@
 package dsmi.folkracelive.entities.raceResults;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@MappedSuperclass
 public class DriverResult {
 
     @Id
