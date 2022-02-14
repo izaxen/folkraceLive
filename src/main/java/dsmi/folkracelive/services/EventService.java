@@ -1,5 +1,6 @@
 package dsmi.folkracelive.services;
 
+import dsmi.folkracelive.entities.RaceDriver;
 import dsmi.folkracelive.entities.RaceEvent;
 import dsmi.folkracelive.entities.driverClasses.*;
 import dsmi.folkracelive.repositories.EventRepository;
@@ -7,8 +8,11 @@ import dsmi.folkracelive.repositories.driverClassRepository.JuniorClassRepositor
 import dsmi.folkracelive.repositories.driverClassRepository.LadyClassRepository;
 import dsmi.folkracelive.repositories.driverClassRepository.SeniorClassRepository;
 import dsmi.folkracelive.repositories.driverClassRepository.VeteranClassRepsitory;
+import dsmi.folkracelive.repositories.results.RaceDriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EventService {
@@ -22,6 +26,9 @@ public class EventService {
     private LadyClassRepository ladyClassRepository;
     @Autowired
     private VeteranClassRepsitory veteranClassRepsitory;
+    @Autowired
+    private RaceDriverRepository raceDriverRepository ;
+
 
     public RaceEvent saveNewEventToDB(RaceEvent event) {
         return eventRepository.save(event);
@@ -41,5 +48,12 @@ public class EventService {
 
     public DriverClasses createNewClassVeteran(VeteranClass veteranClass) {
         return veteranClassRepsitory.save(veteranClass);
+    }
+
+    public void addDriversToEvent(List<RaceDriver> raceDriverList) {
+        for (RaceDriver raceDriver : raceDriverList
+             ) {
+            raceDriverRepository.save(raceDriver);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package dsmi.folkracelive.entities.driverClasses;
 
-import dsmi.folkracelive.entities.Driver;
+import dsmi.folkracelive.entities.RaceDriver;
 import dsmi.folkracelive.entities.RaceEvent;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +38,7 @@ import java.util.List;
     protected int amountOfFinals;
 
     @Transient
-    protected List<Driver> drivers;
+    protected List<RaceDriver> raceDrivers;
 
 
     @OneToOne

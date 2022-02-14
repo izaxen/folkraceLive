@@ -1,6 +1,7 @@
 package dsmi.folkracelive.controllers;
 
 
+import dsmi.folkracelive.entities.RaceDriver;
 import dsmi.folkracelive.entities.RaceEvent;
 import dsmi.folkracelive.entities.driverClasses.*;
 import dsmi.folkracelive.services.EventService;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -40,6 +43,10 @@ public class EventController {
     @PostMapping("/raceEvent/createNewClass/veteran")
     public DriverClasses createNewClassVeteran(@RequestBody VeteranClass veteranClass) {
         return eventService.createNewClassVeteran(veteranClass);
+    }
+    @PostMapping("/raceEvent/driversList")
+    public void createDrivers(@RequestBody List<RaceDriver> raceDriverList){
+        eventService.addDriversToEvent(raceDriverList);
     }
 
 

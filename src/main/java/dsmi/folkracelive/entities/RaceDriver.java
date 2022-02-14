@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -17,7 +18,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Driver {
+public class RaceDriver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
@@ -34,7 +35,9 @@ public class Driver {
             nullable = false
     )
     private String surName;
+
     private String dateOfBirth;
+
     private String club;
     @Column(
             name = "car_model",
@@ -53,5 +56,9 @@ public class Driver {
             nullable = false,
             columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
     )
-    private LocalDateTime createdAt;
+    public LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToOne
+    @JoinColumn(name = "event_id", referencedColumnName = "event_id")
+    private RaceEvent raceEvent;
 }
