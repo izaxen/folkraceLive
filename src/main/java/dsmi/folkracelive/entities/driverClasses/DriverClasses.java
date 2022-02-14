@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 
-abstract public class DriverClasses {
+ public class DriverClasses {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,8 @@ abstract public class DriverClasses {
 
 
     @OneToOne
-    @JoinColumn(name = "event_id" )
+    @JoinColumn(name = "event_id",
+    referencedColumnName = "event_id")
     private RaceEvent raceEvent;
 
 }
