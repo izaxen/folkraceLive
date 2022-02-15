@@ -27,7 +27,7 @@ public class EventService {
     @Autowired
     private VeteranClassRepsitory veteranClassRepsitory;
     @Autowired
-    private RaceDriverRepository raceDriverRepository ;
+    private RaceDriverRepository raceDriverRepository;
 
 
     public RaceEvent saveNewEventToDB(RaceEvent event) {
@@ -52,7 +52,7 @@ public class EventService {
 
     public void addDriversToEvent(List<RaceDriver> raceDriverList) {
         for (RaceDriver raceDriver : raceDriverList
-             ) {
+        ) {
             raceDriverRepository.save(raceDriver);
         }
     }
