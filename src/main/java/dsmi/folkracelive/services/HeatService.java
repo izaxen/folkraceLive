@@ -1,6 +1,8 @@
 package dsmi.folkracelive.services;
 
+import dsmi.folkracelive.entities.HeatRounds;
 import dsmi.folkracelive.entities.RaceDriver;
+import dsmi.folkracelive.entities.RaceEvent;
 import dsmi.folkracelive.repositories.HeatRoundsRepository;
 import dsmi.folkracelive.repositories.RaceDriverRepository;
 import dsmi.folkracelive.repositories.RaceEventRepository;
@@ -20,8 +22,8 @@ public class HeatService {
     @Autowired
     private RaceEventRepository raceEventRepository;
 
-    private double contestant = 6.0;
-    private int contestantHeatCount = 5;
+    private final double CONTESTANT = 6.0;
+    private final int CONTESTANTHEATCOUNT = 5;
 
 
     public void randomizeNewHeatRounds(Map<String, Object> body) {
@@ -38,6 +40,9 @@ public class HeatService {
             default -> drawnRound = drawRoundThreeOrMore(driv.size());
         }
         System.out.println(drawnRound);
+
+        if(driv.size() != drawnRound.size()) return;
+        saveRoundToDb(eventId, driv, round, raceClass, drawnRound);
 
     }
 
@@ -60,10 +65,10 @@ public class HeatService {
 
     private List<Integer> createRoundTwo(int driverListSize) {
 
-        int heats = (int) Math.ceil(driverListSize / contestant);
+        int heats = (int) Math.ceil(driverListSize / CONTESTANT);
         List<Integer> newRoundList = new ArrayList<>();
 
-        for (int i = 0; i < contestantHeatCount; i++) {
+        for (int i = 0; i < CONTESTANTHEATCOUNT; i++) {
             int[] sortedList = sortedListRoundTwo(heats);
             for (int number : sortedList) {
                 newRoundList.add(number);
@@ -82,7 +87,7 @@ public class HeatService {
         int[] arr = new int[heats];
 
         for (int i = 0; i < heats; i++) {
-            for (int j = 0; j < contestantHeatCount; j++) {
+            for (int j = 0; j < CONTESTANTHEATCOUNT; j++) {
                 arr[i] = i + 1;
             }
         }
@@ -108,23 +113,26 @@ public class HeatService {
         return arr;
     }
 
-    private List<Integer> createRoundThreeOrMore(int driverListSize) {
-
-
-/*        Iterator<Integer> iterator = newRoundList.iterator();
-        while (iterator.hasNext()) {
-            int o = iterator.next();
-            iterator.remove();
-        }*/
-        return null;
+    private void saveRoundToDb(Long eventId, List<RaceDriver> driv, int round, String raceClass, List<Integer> newRoundList) {
+        RaceEvent raceEvent = raceEventRepository.getById(eventId);
+        for (int i = 0; i < newRoundList.size() ; i++) {
+           HeatRounds driver = HeatRounds.builder()
+                    .heatNumber(newRoundList.get(i))
+                    .round(round)
+                    .raceClass(raceClass)
+                    .startNumber(driv.get(i).getStartNumber())
+                    .raceEvent(raceEvent)
+                    .build();
+            heatRoundsRepository.save(driver);
+        }
     }
 
     private List<Integer> createHeatList(int driverListSize) {
 
-        int heats = (int) Math.ceil(driverListSize / contestant);
+        int heats = (int) Math.ceil(driverListSize / CONTESTANT);
         List<Integer> newRoundList = new ArrayList<>();
         for (int i = 0; i < heats; i++) {
-            for (int j = 0; j < contestantHeatCount; j++) {
+            for (int j = 0; j < CONTESTANTHEATCOUNT; j++) {
                 newRoundList.add(i + 1);
             }
         }

@@ -15,8 +15,10 @@ import javax.persistence.*;
 @Builder
 public class HeatRounds {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "heat_round_id",
             nullable = false
+
     )
     private Long heatRoundId;
 
