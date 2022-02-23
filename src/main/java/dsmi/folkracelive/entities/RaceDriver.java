@@ -13,7 +13,7 @@ import java.util.Date;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
-@Table(name="drivers")
+@Table(name="race_drivers")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,6 +36,7 @@ public class RaceDriver {
     )
     private String surName;
 
+    @Column(name = "date_of_birth", nullable = false)
     private String dateOfBirth;
 
     private String club;
@@ -44,12 +45,15 @@ public class RaceDriver {
             nullable = false
     )
     private String carModel;
+
     private String notifier;
     @Column(
             name ="race_class",
             nullable = false
     )
     private String raceClass;
+
+    private boolean retired = false;
 
     @Column(
             name = "created_at",

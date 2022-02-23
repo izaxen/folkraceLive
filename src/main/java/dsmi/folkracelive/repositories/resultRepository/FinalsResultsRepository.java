@@ -1,4 +1,4 @@
-package dsmi.folkracelive.repositories.results;
+package dsmi.folkracelive.repositories.resultRepository;
 
 import org.springframework.stereotype.Repository;
 

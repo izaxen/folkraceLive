@@ -1,4 +1,4 @@
-package dsmi.folkracelive.repositories.results;
+package dsmi.folkracelive.repositories.resultRepository;
 
 import dsmi.folkracelive.entities.raceResults.HeatResult;
 import org.springframework.data.jpa.repository.JpaRepository;
