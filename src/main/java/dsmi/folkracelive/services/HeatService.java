@@ -39,7 +39,6 @@ public class HeatService {
             case 2 -> drawnRound = drawRoundTwo(driv.size());
             default -> drawnRound = drawRoundThreeOrMore(driv.size());
         }
-        System.out.println(drawnRound);
 
         if(driv.size() != drawnRound.size()) return;
         saveRoundToDb(eventId, driv, round, raceClass, drawnRound);
