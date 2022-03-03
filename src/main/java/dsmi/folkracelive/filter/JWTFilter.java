@@ -33,6 +33,7 @@ public class JWTFilter extends OncePerRequestFilter {
         String userName = null;
 
         if (null != authorization && authorization.startsWith("Bearer ")) {
+            //Ne
             token = authorization.substring(7);
             userName = jwtUtility.getUsernameFromToken(token);
         }

@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JWTRequest {
-    private String clubname;
+    private String clubName;
     private String password;
 }

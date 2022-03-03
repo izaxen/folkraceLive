@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/rest")
+//@RequestMapping("/rest")
 public class UserController {
 
     @Autowired
@@ -35,13 +35,13 @@ public class UserController {
         return "admin";
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/api/authenticate")
     public JWTResponse authenticate(@RequestBody JWTRequest jwtRequest) throws Exception {
 
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            jwtRequest.getClubname(),
+                            jwtRequest.getClubName(),
                             jwtRequest.getPassword()
                     )
             );
@@ -49,7 +49,7 @@ public class UserController {
             throw new Exception("Felaktiga inloggningsupgifter", e);
         }
 
-        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(jwtRequest.getClubname());
+        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(jwtRequest.getClubName());
         final String token = jwtUtility.generateToken(userDetails);
 
         return new JWTResponse(token);
