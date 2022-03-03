@@ -1,2 +1,2 @@
 jwt:
-  secret: secretkey123
+  secret: ${env.JWT_SECRET}

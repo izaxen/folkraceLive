@@ -1,10 +1,10 @@
 package dsmi.folkracelive.controllers;
 
 
-import dsmi.folkracelive.entities.jwt.JWTRequest;
-import dsmi.folkracelive.entities.jwt.JWTResponse;
+import dsmi.folkracelive.jwt.JWTRequest;
+import dsmi.folkracelive.jwt.JWTResponse;
 import dsmi.folkracelive.services.CustomUserDetailsService;
-import dsmi.folkracelive.utility.JWTUtility;
+import dsmi.folkracelive.jwt.utility.JWTUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,7 +1,6 @@
 package dsmi.folkracelive.configs;
 
-import dsmi.folkracelive.filter.JWTFilter;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import dsmi.folkracelive.jwt.filter.JWTFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
