@@ -12,8 +12,8 @@ public class FolkraceLiveApplication {
         SpringApplication.run(FolkraceLiveApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
-    }
+    }*/
 }

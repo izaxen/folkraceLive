@@ -30,8 +30,10 @@ public class HeatRounds {
     @Column(name = "race_class")
     private String raceClass;
 
-    @Column(name = "start_number")
-    private int startNumber;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "start_number",
+    referencedColumnName = "start_number")
+    private RaceDriver startNumber;
 
     @OneToOne
     @JoinColumn(name = "event_id",

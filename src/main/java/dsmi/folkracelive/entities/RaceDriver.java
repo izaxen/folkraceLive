@@ -27,6 +27,7 @@ public class RaceDriver {
     )
     private Long id;
 
+    @Column(name = "start_number")
     private int startNumber;
 
     private String name;

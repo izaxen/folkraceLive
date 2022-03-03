@@ -32,6 +32,9 @@ public class HeatService {
         int round = (int) body.get("round");
 
         String raceClass = (String) body.get("class");
+
+        heatRoundsRepository.deleteHeatRoundsByRound(eventId, round,raceClass);
+
         List<RaceDriver> driv = raceDriverRepository.getRaceDriversByEventClassCancellation(eventId, raceClass);
         List<Integer> drawnRound;
         switch (round) {
@@ -42,7 +45,8 @@ public class HeatService {
 
         if(driv.size() != drawnRound.size()) return;
         saveRoundToDb(eventId, driv, round, raceClass, drawnRound);
-
+        List<HeatRounds> nn = heatRoundsRepository.getHeatRoundsByRound(eventId, round,raceClass);
+        System.out.println(nn);
     }
 
     private List<Integer> drawRoundOne(int driverListSize) {
@@ -119,7 +123,7 @@ public class HeatService {
                     .heatNumber(newRoundList.get(i))
                     .round(round)
                     .raceClass(raceClass)
-                    .startNumber(driv.get(i).getStartNumber())
+                    .startNumber(driv.get(i))
                     .raceEvent(raceEvent)
                     .build();
             heatRoundsRepository.save(driver);
