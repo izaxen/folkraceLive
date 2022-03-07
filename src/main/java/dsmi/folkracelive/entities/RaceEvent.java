@@ -11,8 +11,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Builder
 public class RaceEvent {
     @Id
@@ -34,5 +32,9 @@ public class RaceEvent {
             nullable = false
     )
     private String eventDate;
+
+    @ManyToOne
+    @JoinColumn(name = "club_id")
+    private User user;
 
 }

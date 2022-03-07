@@ -1,10 +1,12 @@
 package dsmi.folkracelive.controllers;
 
 
+import dsmi.folkracelive.entities.User;
 import dsmi.folkracelive.jwt.JWTRequest;
 import dsmi.folkracelive.jwt.JWTResponse;
 import dsmi.folkracelive.services.CustomUserDetailsService;
 import dsmi.folkracelive.jwt.utility.JWTUtility;
+import dsmi.folkracelive.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +27,9 @@ public class UserController {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/home")
     public String home() {
         return "home";
@@ -33,6 +38,12 @@ public class UserController {
     @GetMapping("/admin")
     public String admin() {
         return "admin";
+    }
+
+    @PostMapping("/createUser")
+    public void createUser(@RequestBody User user){
+        userService.createNewUser(user);
+
     }
 
     @PostMapping("/api/authenticate")
