@@ -1,6 +1,6 @@
 package dsmi.folkracelive.configs;
 
-import dsmi.folkracelive.jwt.filter.JWTFilter;
+import dsmi.folkracelive.jwt.JWTFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/authenticate")
                 .permitAll()
                 .antMatchers("/createUser").permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/**").permitAll()
+                //.anyRequest()
+                //.authenticated()
 
                 .and()
                 .sessionManagement()

@@ -15,15 +15,30 @@ public class UserService {
     @Autowired
     PasswordConfig encode;
 
-    public void createNewUser(User newUser) {
+    public String createNewUser(User newUser) throws Exception {
+        if (isClubName(newUser.getClubName())) {
+            return "Clubname already taken";
+        }
+        if (isEmail(newUser.getEmail())) {
+            return "Email already taken";
+        }
+
         User user = User.builder().clubName(newUser.getClubName())
                 .password(encode.encoder().encode(newUser.getPassword()))
                 .email(newUser.getEmail())
                 .role("USER")
                 .build();
-
-
         userRepository.save(user);
+        return "New user created";
+    }
 
+    private boolean isClubName(String clubName) {
+        User user = userRepository.findByClubName(clubName);
+        return user != null;
+    }
+
+    private boolean isEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
     }
 }

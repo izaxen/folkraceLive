@@ -1,4 +1,4 @@
-package dsmi.folkracelive.jwt.utility;
+package dsmi.folkracelive.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

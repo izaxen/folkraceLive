@@ -1,7 +1,6 @@
-package dsmi.folkracelive.jwt.filter;
+package dsmi.folkracelive.jwt;
 
 import dsmi.folkracelive.services.CustomUserDetailsService;
-import dsmi.folkracelive.jwt.utility.JWTUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

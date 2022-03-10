@@ -2,17 +2,21 @@ package dsmi.folkracelive.controllers;
 
 
 import dsmi.folkracelive.entities.User;
-import dsmi.folkracelive.jwt.JWTRequest;
-import dsmi.folkracelive.jwt.JWTResponse;
+import dsmi.folkracelive.DTO.JWTRequest;
+import dsmi.folkracelive.DTO.JWTResponse;
 import dsmi.folkracelive.services.CustomUserDetailsService;
-import dsmi.folkracelive.jwt.utility.JWTUtility;
+import dsmi.folkracelive.jwt.JWTUtility;
 import dsmi.folkracelive.services.UserService;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 //@RequestMapping("/rest")
@@ -40,10 +44,21 @@ public class UserController {
         return "admin";
     }
 
-    @PostMapping("/createUser")
-    public void createUser(@RequestBody User user){
-        userService.createNewUser(user);
+    @PostMapping("/updateUser/{id}")
+    public void updateUser(@RequestBody User user, @PathVariable String id){
 
+    }
+    @PostMapping("/updateUserImage/{id}")
+    public void updateClubImage(@RequestParam("image")MultipartFile file, @PathVariable String id) throws IOException {
+        byte[] image = Base64.encodeBase64(file.getBytes());
+        String result = new String(image);
+        System.out.println(result);
+    }
+
+    @PostMapping("/createUser")
+    public void createUser(@RequestBody User user) throws Exception {
+       String res = userService.createNewUser(user);
+        System.out.println(res);
     }
 
     @PostMapping("/api/authenticate")
