@@ -1,6 +1,6 @@
 package dsmi.folkracelive.controllers;
 
-import dsmi.folkracelive.DTO.HeatInformation.HeatInformationThreeDTO;
+import dsmi.folkracelive.dto.heatInfo.HeatInformationThreeDTO;
 import dsmi.folkracelive.services.HeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

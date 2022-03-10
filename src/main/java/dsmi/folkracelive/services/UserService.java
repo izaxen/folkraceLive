@@ -1,7 +1,11 @@
 package dsmi.folkracelive.services;
 
 import dsmi.folkracelive.configs.PasswordConfig;
+import dsmi.folkracelive.dto.models.UserNoPwDTO;
 import dsmi.folkracelive.entities.User;
+import dsmi.folkracelive.exceptions.ClubnameAlreadyExist;
+import dsmi.folkracelive.exceptions.EmailAlreadyExists;
+import dsmi.folkracelive.mapper.UserMapper;
 import dsmi.folkracelive.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +17,17 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
+    UserMapper userMapper;
+
+    @Autowired
     PasswordConfig encode;
 
-    public String createNewUser(User newUser) throws Exception {
+    public UserNoPwDTO createNewUser(User newUser) throws Exception {
         if (isClubName(newUser.getClubName())) {
-            return "Clubname already taken";
+            throw new ClubnameAlreadyExist();
         }
         if (isEmail(newUser.getEmail())) {
-            return "Email already taken";
+            throw new EmailAlreadyExists();
         }
 
         User user = User.builder().clubName(newUser.getClubName())
@@ -28,8 +35,8 @@ public class UserService {
                 .email(newUser.getEmail())
                 .role("USER")
                 .build();
-        userRepository.save(user);
-        return "New user created";
+
+        return userMapper.UserNoPwDTO(userRepository.save(user));
     }
 
     private boolean isClubName(String clubName) {

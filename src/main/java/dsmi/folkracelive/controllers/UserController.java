@@ -1,11 +1,14 @@
 package dsmi.folkracelive.controllers;
 
 
+import dsmi.folkracelive.dto.jwt.JWTResponse;
+import dsmi.folkracelive.dto.jwt.JWTLogin;
+import dsmi.folkracelive.dto.models.UserNoPwDTO;
 import dsmi.folkracelive.entities.User;
-import dsmi.folkracelive.DTO.JWTRequest;
-import dsmi.folkracelive.DTO.JWTResponse;
-import dsmi.folkracelive.services.CustomUserDetailsService;
+import dsmi.folkracelive.exceptions.InvalidLoginCredentials;
+import dsmi.folkracelive.jwt.JWTAuthenticate;
 import dsmi.folkracelive.jwt.JWTUtility;
+import dsmi.folkracelive.services.CustomUserDetailsService;
 import dsmi.folkracelive.services.UserService;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +25,13 @@ import java.io.IOException;
 //@RequestMapping("/rest")
 public class UserController {
 
-    @Autowired
-    private JWTUtility jwtUtility;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JWTAuthenticate jwtAuthenticate;
 
     @GetMapping("/home")
     public String home() {
@@ -44,41 +43,26 @@ public class UserController {
         return "admin";
     }
 
-    @PostMapping("/updateUser/{id}")
-    public void updateUser(@RequestBody User user, @PathVariable String id){
+    @PutMapping("/updateUser/{id}")
+    public void updateUser(@RequestBody User user, @PathVariable String id) {
 
     }
-    @PostMapping("/updateUserImage/{id}")
-    public void updateClubImage(@RequestParam("image")MultipartFile file, @PathVariable String id) throws IOException {
+
+    @PutMapping("/updateUserImage/{id}")
+    public void updateClubImage(@RequestParam("image") MultipartFile file, @PathVariable String id) throws IOException {
         byte[] image = Base64.encodeBase64(file.getBytes());
         String result = new String(image);
         System.out.println(result);
     }
 
     @PostMapping("/createUser")
-    public void createUser(@RequestBody User user) throws Exception {
-       String res = userService.createNewUser(user);
-        System.out.println(res);
+    public UserNoPwDTO createUser(@RequestBody User user) throws Exception {
+        return userService.createNewUser(user);
     }
 
     @PostMapping("/api/authenticate")
-    public JWTResponse authenticate(@RequestBody JWTRequest jwtRequest) throws Exception {
-
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            jwtRequest.getClubName(),
-                            jwtRequest.getPassword()
-                    )
-            );
-        } catch (BadCredentialsException e) {
-            throw new Exception("Felaktiga inloggningsupgifter", e);
-        }
-
-        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(jwtRequest.getClubName());
-        final String token = jwtUtility.generateToken(userDetails);
-
-        return new JWTResponse(token);
+    public JWTResponse authenticate(@RequestBody JWTLogin jwtLogin) throws Exception {
+        return jwtAuthenticate.authenticate(jwtLogin);
     }
 
 }

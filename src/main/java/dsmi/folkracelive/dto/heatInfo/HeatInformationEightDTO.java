@@ -1,4 +1,4 @@
-package dsmi.folkracelive.DTO.HeatInformation;
+package dsmi.folkracelive.dto.heatInfo;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @Builder
 
-public class HeatInformationFourDTO {
+public class HeatInformationEightDTO {
     private String raceClass;
     private int startNumber;
     private String name;
@@ -22,11 +22,10 @@ public class HeatInformationFourDTO {
     private String pointsRoundTwo;
     private String pointsRoundThree;
     private String pointsRoundFour;
-
-
-
-
-
+    private String pointsRoundFive;
+    private String pointsRoundSix;
+    private String pointsRoundSeven;
+    private String pointsRoundEight;
 
 }
 

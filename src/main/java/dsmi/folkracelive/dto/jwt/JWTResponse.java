@@ -1,4 +1,4 @@
-package dsmi.folkracelive.DTO;
+package dsmi.folkracelive.dto.jwt;
 
 
 import lombok.AllArgsConstructor;
