@@ -1,5 +1,6 @@
 package dsmi.folkracelive.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class RaceEvent {
 
     @ManyToOne
     @JoinColumn(name = "club_id")
+    @JsonBackReference
     private User user;
 
 }

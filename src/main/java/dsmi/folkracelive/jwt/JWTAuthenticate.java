@@ -4,6 +4,7 @@ import dsmi.folkracelive.dto.jwt.JWTLogin;
 import dsmi.folkracelive.dto.jwt.JWTResponse;
 import dsmi.folkracelive.exceptions.InvalidLoginCredentials;
 import dsmi.folkracelive.services.CustomUserDetailsService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,16 +14,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Component
+
 public class JWTAuthenticate {
 
-    @Autowired
-    private JWTUtility jwtUtility;
+    private final JWTUtility jwtUtility;
+    private final AuthenticationManager authenticationManager;
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    public JWTAuthenticate(JWTUtility jwtUtility, AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService) {
+        this.jwtUtility = jwtUtility;
+        this.authenticationManager = authenticationManager;
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
     public JWTResponse authenticate(@RequestBody JWTLogin jwtLogin) throws Exception {
 
