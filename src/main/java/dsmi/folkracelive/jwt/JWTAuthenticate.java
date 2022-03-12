@@ -28,6 +28,12 @@ public class JWTAuthenticate {
         this.customUserDetailsService = customUserDetailsService;
     }
 
+    /**
+     * Method that authenticate the login details against DB if they are ok it creates a valid token
+     * @param jwtLogin Object clubname and password
+     * @return String token
+     * @throws Exception invalid creddentials
+     */
     public JWTResponse authenticate(@RequestBody JWTLogin jwtLogin) throws Exception {
 
         try {

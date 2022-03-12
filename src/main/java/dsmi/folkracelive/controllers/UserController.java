@@ -35,21 +35,44 @@ public class UserController {
         userService.updateUser(userDetails, updatedDetails);
     }
 
+    /**
+     * Restcontroller that takes in an image for the club
+     * @param file imagefile
+     * @param user tokendetails to user
+     * @throws IOException If problem with file
+     */
     @PutMapping("/rest/userImage/")
-    public void updateClubImage(@RequestParam("image") MultipartFile file, @AuthenticationPrincipal CustomUserDetails user) throws IOException {
-        userService.updateClubImage(file, user);
+    public UserNoPwDTO updateClubImage(@RequestParam("image") MultipartFile file, @AuthenticationPrincipal CustomUserDetails user) throws IOException {
+        return userService.updateClubImage(file, user);
     }
 
+    /**
+     * Restcontroller that delete club image
+     * @param user tokendetails to user
+     */
     @DeleteMapping("/rest/userImage/")
-    public void deleteClubImage(@AuthenticationPrincipal CustomUserDetails user) {
-        userService.deleteClubImage(user);
+    public UserNoPwDTO deleteClubImage(@AuthenticationPrincipal CustomUserDetails user) {
+       return userService.deleteClubImage(user);
     }
 
-    @PostMapping("/rest/createUser")
-    public UserNoPwDTO createUser(@RequestBody User user) throws Exception {
-        return userService.createNewUser(user);
+    /**
+     * Restcontroller for creating a new user. After user is created it automaticly sets a token
+     * @param user Object that contains clubName, password and email
+     * @return String Token
+     * @throws Exception if clubname or email taken
+     */
+    @PostMapping("/api/createUser")
+    public JWTResponse createUser(@RequestBody User user) throws Exception {
+        userService.createNewUser(user);
+        return jwtAuthenticate.authenticate(new JWTLogin(user.getClubName(), user.getPassword()));
     }
 
+    /**
+     * Restcontroller that authenticate the user through its token
+     * @param jwtLogin Object with clubname and password
+     * @return String token
+     * @throws Exception If login fails
+     */
     @PostMapping("/api/authenticate")
     public JWTResponse authenticate(@RequestBody JWTLogin jwtLogin) throws Exception {
         return jwtAuthenticate.authenticate(jwtLogin);
