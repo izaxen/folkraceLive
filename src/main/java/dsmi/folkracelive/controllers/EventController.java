@@ -20,11 +20,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest")
 public class EventController {
+    private final EventService eventService;
+
     @Autowired
-    private EventService eventService;
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
+    }
 
     @PostMapping("/raceEvent/createNewEvent")
-    public RaceEvent createNewEvent(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody CreateNewEventDTO raceEvent) {
+    public RaceEvent createNewEvent(@AuthenticationPrincipal CustomUserDetails userDetails
+            , @RequestBody CreateNewEventDTO raceEvent) {
         return eventService.saveNewEventToDB(userDetails, raceEvent);
     }
 
@@ -52,6 +57,5 @@ public class EventController {
     public void createDrivers(@RequestBody List<RaceDriver> raceDriverList) {
         eventService.addDriversToEvent(raceDriverList);
     }
-
 
 }

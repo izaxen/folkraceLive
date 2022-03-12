@@ -13,14 +13,16 @@ import java.util.*;
 
 @Service
 public class HeatService {
-    @Autowired
-    private HeatRoundsRepository heatRoundsRepository;
+    private final HeatRoundsRepository heatRoundsRepository;
+    private final RaceDriverRepository raceDriverRepository;
+    private final RaceEventRepository raceEventRepository;
 
     @Autowired
-    private RaceDriverRepository raceDriverRepository;
-
-    @Autowired
-    private RaceEventRepository raceEventRepository;
+    public HeatService(HeatRoundsRepository heatRoundsRepository, RaceDriverRepository raceDriverRepository, RaceEventRepository raceEventRepository) {
+        this.heatRoundsRepository = heatRoundsRepository;
+        this.raceDriverRepository = raceDriverRepository;
+        this.raceEventRepository = raceEventRepository;
+    }
 
     private final double CONTESTANT = 6.0;
     private final int CONTESTANTHEATCOUNT = 5;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EventMapper {
+
     public RaceEvent createNewEvent(User user, CreateNewEventDTO event){
 
     return RaceEvent.builder()

@@ -16,8 +16,12 @@ import java.util.Map;
 
 public class HeatController {
 
+    private final HeatService heatService;
+
     @Autowired
-    private HeatService heatService;
+    public HeatController(HeatService heatService) {
+        this.heatService = heatService;
+    }
 
     @PostMapping("heatService/randomizeNewHeatRounds")
     public List<HeatInformationThreeDTO> randomizeNewHeatRounds(@RequestBody Map<String, Object> body){

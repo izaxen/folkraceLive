@@ -5,12 +5,12 @@ import dsmi.folkracelive.entities.RaceDriver;
 import dsmi.folkracelive.entities.RaceEvent;
 import dsmi.folkracelive.entities.driverClasses.*;
 import dsmi.folkracelive.mapper.EventMapper;
+import dsmi.folkracelive.repositories.RaceDriverRepository;
 import dsmi.folkracelive.repositories.RaceEventRepository;
 import dsmi.folkracelive.repositories.driverClassRepository.JuniorClassRepository;
 import dsmi.folkracelive.repositories.driverClassRepository.LadyClassRepository;
 import dsmi.folkracelive.repositories.driverClassRepository.SeniorClassRepository;
 import dsmi.folkracelive.repositories.driverClassRepository.VeteranClassRepsitory;
-import dsmi.folkracelive.repositories.RaceDriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +26,11 @@ public class EventService {
     private final RaceDriverRepository raceDriverRepository;
     private final EventMapper eventMapper;
 
-@Autowired
-    public EventService(RaceEventRepository raceEventRepository, JuniorClassRepository juniorClassRepository, SeniorClassRepository seniorClassRepository, LadyClassRepository ladyClassRepository, VeteranClassRepsitory veteranClassRepsitory, RaceDriverRepository raceDriverRepository, EventMapper eventMapper) {
+    @Autowired
+    public EventService(RaceEventRepository raceEventRepository, JuniorClassRepository juniorClassRepository
+            , SeniorClassRepository seniorClassRepository, LadyClassRepository ladyClassRepository
+            , VeteranClassRepsitory veteranClassRepsitory, RaceDriverRepository raceDriverRepository
+            , EventMapper eventMapper) {
         this.raceEventRepository = raceEventRepository;
         this.juniorClassRepository = juniorClassRepository;
         this.seniorClassRepository = seniorClassRepository;
@@ -38,7 +41,6 @@ public class EventService {
     }
 
     public RaceEvent saveNewEventToDB(CustomUserDetails user, CreateNewEventDTO event) {
-
         return raceEventRepository.save(eventMapper.createNewEvent(user.getUser(), event));
     }
 
@@ -59,6 +61,6 @@ public class EventService {
     }
 
     public void addDriversToEvent(List<RaceDriver> raceDriverList) {
-            raceDriverRepository.saveAll(raceDriverList);
+        raceDriverRepository.saveAll(raceDriverList);
     }
 }

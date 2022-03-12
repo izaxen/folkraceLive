@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest")
 public class ResultController {
 
+    private final ResultService resultService;
+
     @Autowired
-    private ResultService resultService;
+    public ResultController(ResultService resultService) {
+        this.resultService = resultService;
+    }
 }
