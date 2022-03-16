@@ -18,6 +18,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Method that looking in the DB if user exist and creates a user and returns it in a Customeruserdetails
+     * @param clubName String
+     * @return Customerdetailsuser
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String clubName) throws UsernameNotFoundException {
 

@@ -8,12 +8,10 @@ import dsmi.folkracelive.exceptions.EmailAlreadyExists;
 import dsmi.folkracelive.mapper.UserMapper;
 import dsmi.folkracelive.repositories.UserRepository;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Map;
 
