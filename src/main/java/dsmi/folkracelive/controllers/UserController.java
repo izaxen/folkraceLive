@@ -68,7 +68,7 @@ public class UserController {
     }
 
     /**
-     * Restcontroller that authenticate the user through its token
+     * Restcontroller that authenticate the user through its credentials and sets a new token
      * @param jwtLogin Object with clubname and password
      * @return String token
      * @throws Exception If login fails
