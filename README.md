@@ -1,3 +1,3 @@
 # Folkrace live
 Spring Boot project for API to create a new program for racing results
-Svelte for frontend and postgresql for DB
+React for frontend and postgresql for DB
